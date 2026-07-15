@@ -5,6 +5,7 @@ import pkg from './package.json' with { type: 'json' }
 // PWA is implemented manually (see public/sw.js + public/manifest.webmanifest)
 // to avoid the fragile workbox-build bundler dependency chain in this environment.
 export default defineConfig({
+  base: '/xaivon-planner/',
   plugins: [react()],
   define: {
     __APP_VERSION__: JSON.stringify(pkg.version),
