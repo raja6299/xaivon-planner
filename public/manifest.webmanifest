@@ -1,0 +1,22 @@
+{
+  "name": "Daily Task Reminder",
+  "short_name": "DailyTask",
+  "description": "A fast, offline-first daily planner with one-tap task completion.",
+  "theme_color": "#0f1115",
+  "background_color": "#0f1115",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "utilities"],
+  "lang": "en",
+  "dir": "ltr"
+}

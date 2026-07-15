@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/icons/icon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#0f1115" />
+    <meta name="description" content="A fast, offline-first daily planner with one-tap task completion." />
+    <title>Daily Task Reminder</title>
+    <script>
+      // Apply the saved theme before paint to avoid a flash of the wrong theme.
+      (function () {
+        try {
+          var pref = localStorage.getItem('dtr:theme') || 'system';
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var dark = pref === 'dark' || (pref === 'system' && prefersDark);
+          var el = document.documentElement;
+          el.classList.remove('dark', 'light');
+          el.classList.add(dark ? 'dark' : 'light');
+        } catch (e) {
+          /* keep the default dark class from <html> */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

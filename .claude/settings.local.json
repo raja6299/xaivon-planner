@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(npx tailwindcss *)",
+      "Bash(npx *)",
+      "Bash(npm run *)",
+      "Bash(npm ls *)",
+      "Bash(npm view *)",
+      "Bash(echo \"LINT_EXIT=$?\")",
+      "Bash(echo \"BUILD_EXIT=$?\")",
+      "Bash(echo \"TEST_EXIT=$?\")",
+      "Bash(rm -f \"src/components/planner/StatsBar.tsx\" \"src/components/planner/FilterBar.tsx\" \"src/components/ui/Modal.tsx\")",
+      "Bash(rmdir \"src/components/planner\")"
+    ]
+  }
+}
