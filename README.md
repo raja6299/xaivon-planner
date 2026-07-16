@@ -5,17 +5,24 @@ A complete, production-quality Progressive Web App (PWA) for personal daily plan
 ## Tech Stack
 - **React 19** + **Vite** + **TypeScript**
 - **Tailwind CSS** (Dark mode default, light and system themes available)
-- **IndexedDB** (Offline-first architecture, no backend required)
+- **IndexedDB** & **LocalStorage** (Offline-first architecture, no backend required)
 - **PWA** (Manifest + Service Worker, installable, offline capabilities)
 - **@dnd-kit** (For accessible drag-and-drop task reordering)
 
 ## Architecture Overview
 
-The app is entirely client-side. Tasks, preferences, and theme settings are persisted locally in the browser. 
+The application is entirely client-side, designed to function offline without a backend. 
 
-*   **Storage Layer**: IndexedDB provides a robust asynchronous storage engine capable of scaling beyond LocalStorage limits. 
-*   **State Management**: React Context (`TaskProvider`, `PreferencesProvider`, `ThemeProvider`) handles global state, optimizing re-renders with Memoization (`useCallback`, `memo`).
-*   **Offline-First**: Service Worker caches all static assets (`vite-plugin-pwa`) enabling instant loading on return visits and full functionality without an internet connection.
+### Storage Layer
+The application uses a hybrid local storage approach:
+*   **IndexedDB**: Stores all task data asynchronously. This provides a robust storage engine capable of scaling far beyond LocalStorage limits and handles frequent read/write operations without blocking the main UI thread.
+*   **LocalStorage**: Stores user preferences (default sorting, default priority, default reminder times) and UI theme settings (dark, light, system). 
+
+### State Management
+React Context handles global state, optimizing re-renders with strict memoization (`useCallback`, `memo`). The state is divided into logical providers (`TaskProvider`, `PreferencesProvider`, `ThemeProvider`) to prevent unnecessary renders across the component tree.
+
+### Offline-First PWA
+A Service Worker caches all static assets (`vite-plugin-pwa`), enabling instant loading on return visits and full functionality without an internet connection. The app includes native install prompts for Android and Desktop.
 
 ## Directory Structure
 
@@ -24,16 +31,19 @@ daily-task-reminder/
 ├── public/                 # Static assets (PWA icons, manifest)
 ├── src/
 │   ├── components/         # React Components
-│   │   ├── layout/         # TopBar, Layout shells
-│   │   ├── tasks/          # TaskRow, TaskEditor, TaskMenu
-│   │   ├── settings/       # SettingsSheet
-│   │   └── ui/             # Reusable UI elements (Button, Modal, Checkbox)
+│   │   ├── ui/             # Reusable UI elements (Button, Modal, Checkbox)
+│   │   ├── ErrorBoundary.tsx
+│   │   ├── InstallPrompt.tsx
+│   │   ├── SettingsSheet.tsx
+│   │   ├── TaskEditor.tsx
+│   │   ├── TaskManager.tsx
+│   │   └── UpdatePrompt.tsx
 │   ├── context/            # React Contexts (Theme, Preferences)
 │   ├── hooks/              # Custom React Hooks
 │   ├── lib/
 │   │   ├── db/             # IndexedDB Connection & Schema
 │   │   ├── tasks/          # Task Repository (CRUD operations)
-│   │   └── utils/          # Helpers (Date, Validation, IDs)
+│   │   └── utils/          # Helpers (Date, Validation, LocalStorage, IDs)
 │   ├── pwa/                # Service Worker and Install Prompt logic
 │   ├── state/              # Global Task State Reducer & Provider
 │   ├── styles/             # Tailwind & Global CSS
@@ -45,7 +55,25 @@ daily-task-reminder/
 └── vite.config.ts          # Vite & PWA Configuration
 ```
 
-## Features
+## Component Tree
+
+```text
+App
+└── ErrorBoundary
+    └── ThemeProvider
+        └── PreferencesProvider
+            └── TaskProvider
+                ├── TaskManager
+                │   ├── Top Bar (Search, Filters, Sort)
+                │   ├── TaskList (Draggable)
+                │   │   └── TaskRow (w/ Checkbox & Actions)
+                │   ├── SettingsSheet
+                │   └── TaskEditor
+                ├── UpdatePrompt
+                └── InstallPrompt
+```
+
+## Implemented Features
 
 -   **Task Management**: Create, edit, complete, delete, and duplicate tasks.
 -   **Categories & Priorities**: Organize tasks using categories and priorities (Low, Medium, High).
@@ -55,7 +83,8 @@ daily-task-reminder/
 -   **Filtering & Sorting**: Instantly search, filter by status/category, and sort by various criteria.
 -   **Dark/Light Mode**: Full theme support respecting system preferences.
 -   **Data Portability**: Export and import your entire task database as JSON.
--   **Installable**: Works as a standalone app on Android, iOS, and Desktop via PWA standards.
+-   **Installable PWA**: Works as a standalone app on Android, iOS, and Desktop via PWA standards.
+-   **Error Handling**: Global ErrorBoundary catches runtime crashes and allows safe local-data resets.
 
 ## Installation & Development
 
@@ -86,11 +115,10 @@ The app is configured to be deployed to GitHub Pages.
 2.  Run `npm run build`.
 3.  Deploy the `/dist` folder to your `gh-pages` branch or via a GitHub Action.
 
-## Known Limitations & Future Roadmap
+## Known Limitations
 
 *   **Cross-Device Sync**: Since all data is stored locally in IndexedDB, data does not sync across different devices or browsers natively.
-*   **Push Notifications**: Currently uses in-app reminders; future roadmap includes Push API for background notifications.
-*   **Calendar Integration**: Future integration with Google Calendar or generic iCal feeds.
+*   **Push Notifications**: Reminders are strictly visual/in-app. Background OS-level push notifications are not supported without a backend push service.
 
 ## Keyboard Shortcuts
 *   **Ctrl/Cmd + Enter**: Save task while in the Edit Task modal.
