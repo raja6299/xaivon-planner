@@ -362,9 +362,10 @@ export default function TaskManager() {
         </div>
 
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          <label className="block text-sm text-text-secondary">
+          <label htmlFor={`${formId}-priority`} className="block text-sm text-text-secondary">
             Priority
             <select
+              id={`${formId}-priority`}
               value={form.priority}
               onChange={(e) => setForm((f) => ({ ...f, priority: e.target.value as Priority }))}
               className="mt-1 w-full rounded-lg border border-border bg-surface px-2 py-2 text-text-primary"
@@ -377,9 +378,10 @@ export default function TaskManager() {
             </select>
           </label>
 
-          <label className="block text-sm text-text-secondary">
+          <label htmlFor={`${formId}-category`} className="block text-sm text-text-secondary">
             Category
             <input
+              id={`${formId}-category`}
               type="text"
               list={`${formId}-categories`}
               value={form.category}
@@ -394,9 +396,10 @@ export default function TaskManager() {
             </datalist>
           </label>
 
-          <label className="block text-sm text-text-secondary">
+          <label htmlFor={`${formId}-duedate`} className="block text-sm text-text-secondary">
             Due date
             <input
+              id={`${formId}-duedate`}
               type="date"
               value={form.dueDate}
               onChange={(e) => setForm((f) => ({ ...f, dueDate: e.target.value }))}
@@ -404,9 +407,10 @@ export default function TaskManager() {
             />
           </label>
 
-          <label className="block text-sm text-text-secondary">
+          <label htmlFor={`${formId}-reminder`} className="block text-sm text-text-secondary">
             Reminder
             <input
+              id={`${formId}-reminder`}
               type="time"
               value={form.reminderTime}
               onChange={(e) => setForm((f) => ({ ...f, reminderTime: e.target.value }))}
@@ -414,9 +418,10 @@ export default function TaskManager() {
             />
           </label>
 
-          <label className="block text-sm text-text-secondary">
+          <label htmlFor={`${formId}-repeat`} className="block text-sm text-text-secondary">
             Repeat
             <select
+              id={`${formId}-repeat`}
               value={form.repeatType}
               onChange={(e) => setForm((f) => ({ ...f, repeatType: e.target.value as RepeatType }))}
               className="mt-1 w-full rounded-lg border border-border bg-surface px-2 py-2 text-text-primary"
@@ -441,9 +446,10 @@ export default function TaskManager() {
       </form>
 
       <section className="mb-4 flex flex-wrap items-end gap-3" aria-label="Filters and search">
-        <label className="block text-sm text-text-secondary">
+        <label htmlFor="search-input" className="block text-sm text-text-secondary">
           Search
           <input
+            id="search-input"
             type="search"
             value={state.query}
             onChange={(e) => setQuery(e.target.value)}
@@ -453,9 +459,10 @@ export default function TaskManager() {
           />
         </label>
 
-        <label className="block text-sm text-text-secondary">
+        <label htmlFor="status-filter" className="block text-sm text-text-secondary">
           Status
           <select
+            id="status-filter"
             value={state.filters.status}
             onChange={(e) => setFilters({ status: e.target.value as TaskFilterStatus })}
             className="mt-1 block rounded-lg border border-border bg-surface px-2 py-2 text-text-primary"
@@ -468,9 +475,10 @@ export default function TaskManager() {
           </select>
         </label>
 
-        <label className="block text-sm text-text-secondary">
+        <label htmlFor="category-filter" className="block text-sm text-text-secondary">
           Category
           <select
+            id="category-filter"
             value={state.filters.category ?? ''}
             onChange={(e) =>
               setFilters({ category: e.target.value === '' ? null : e.target.value })
@@ -486,9 +494,10 @@ export default function TaskManager() {
           </select>
         </label>
 
-        <label className="block text-sm text-text-secondary">
+        <label htmlFor="sort-select" className="block text-sm text-text-secondary">
           Sort
           <select
+            id="sort-select"
             value={`${state.sort.field}:${state.sort.direction}`}
             onChange={(e) => {
               const [field, direction] = e.target.value.split(':')

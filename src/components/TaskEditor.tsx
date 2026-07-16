@@ -107,9 +107,10 @@ export default function TaskEditor({ task, categories, onClose }: TaskEditorProp
           void save()
         }}
       >
-        <label className="block text-sm text-text-secondary">
+        <label htmlFor={`${fieldId}-title`} className="block text-sm text-text-secondary">
           Title
           <input
+            id={`${fieldId}-title`}
             type="text"
             value={form.title}
             onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
@@ -122,9 +123,10 @@ export default function TaskEditor({ task, categories, onClose }: TaskEditorProp
           )}
         </label>
 
-        <label className="block text-sm text-text-secondary">
+        <label htmlFor={`${fieldId}-notes`} className="block text-sm text-text-secondary">
           Description
           <textarea
+            id={`${fieldId}-notes`}
             value={form.notes}
             onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))}
             className={`${inputClass} min-h-[80px] resize-y`}
@@ -133,9 +135,10 @@ export default function TaskEditor({ task, categories, onClose }: TaskEditorProp
         </label>
 
         <div className="grid grid-cols-2 gap-3">
-          <label className="block text-sm text-text-secondary">
+          <label htmlFor={`${fieldId}-priority`} className="block text-sm text-text-secondary">
             Priority
             <select
+              id={`${fieldId}-priority`}
               value={form.priority}
               onChange={(e) => setForm((f) => ({ ...f, priority: e.target.value as Priority }))}
               className={inputClass}
@@ -148,9 +151,10 @@ export default function TaskEditor({ task, categories, onClose }: TaskEditorProp
             </select>
           </label>
 
-          <label className="block text-sm text-text-secondary">
+          <label htmlFor={`${fieldId}-category`} className="block text-sm text-text-secondary">
             Category
             <input
+              id={`${fieldId}-category`}
               type="text"
               list={`${fieldId}-categories`}
               value={form.category}
@@ -165,9 +169,10 @@ export default function TaskEditor({ task, categories, onClose }: TaskEditorProp
             </datalist>
           </label>
 
-          <label className="block text-sm text-text-secondary">
+          <label htmlFor={`${fieldId}-duedate`} className="block text-sm text-text-secondary">
             Due date
             <input
+              id={`${fieldId}-duedate`}
               type="date"
               value={form.dueDate}
               onChange={(e) => setForm((f) => ({ ...f, dueDate: e.target.value }))}
@@ -178,9 +183,10 @@ export default function TaskEditor({ task, categories, onClose }: TaskEditorProp
             )}
           </label>
 
-          <label className="block text-sm text-text-secondary">
+          <label htmlFor={`${fieldId}-reminder`} className="block text-sm text-text-secondary">
             Reminder
             <input
+              id={`${fieldId}-reminder`}
               type="time"
               value={form.reminderTime}
               onChange={(e) => setForm((f) => ({ ...f, reminderTime: e.target.value }))}
@@ -191,9 +197,10 @@ export default function TaskEditor({ task, categories, onClose }: TaskEditorProp
             )}
           </label>
 
-          <label className="col-span-2 block text-sm text-text-secondary">
+          <label htmlFor={`${fieldId}-repeat`} className="col-span-2 block text-sm text-text-secondary">
             Repeat
             <select
+              id={`${fieldId}-repeat`}
               value={form.repeatType}
               onChange={(e) => setForm((f) => ({ ...f, repeatType: e.target.value as RepeatType }))}
               className={inputClass}

@@ -107,9 +107,10 @@ export default function SettingsSheet({ isOpen, onClose }: SettingsSheetProps) {
     <Modal isOpen={isOpen} onClose={onClose} title="Settings" size="md">
       <div className="space-y-6">
         <Section title="Appearance">
-          <label className="flex items-center justify-between gap-3 text-sm text-text-secondary">
+          <label htmlFor="settings-theme" className="flex items-center justify-between gap-3 text-sm text-text-secondary">
             Theme
             <select
+              id="settings-theme"
               value={theme}
               onChange={(e) => setTheme(e.target.value as ThemePreference)}
               className={controlClass}
@@ -125,9 +126,10 @@ export default function SettingsSheet({ isOpen, onClose }: SettingsSheetProps) {
         </Section>
 
         <Section title="Task Preferences">
-          <label className="flex items-center justify-between gap-3 text-sm text-text-secondary">
+          <label htmlFor="settings-sort" className="flex items-center justify-between gap-3 text-sm text-text-secondary">
             Default sorting
             <select
+              id="settings-sort"
               value={sortValue}
               onChange={(e) => {
                 const [field, direction] = e.target.value.split(':')
@@ -147,9 +149,10 @@ export default function SettingsSheet({ isOpen, onClose }: SettingsSheetProps) {
             </select>
           </label>
 
-          <label className="flex items-center justify-between gap-3 text-sm text-text-secondary">
+          <label htmlFor="settings-priority" className="flex items-center justify-between gap-3 text-sm text-text-secondary">
             Default priority
             <select
+              id="settings-priority"
               value={preferences.defaultPriority}
               onChange={(e) => setDefaultPriority(e.target.value as Priority)}
               className={controlClass}
@@ -163,9 +166,10 @@ export default function SettingsSheet({ isOpen, onClose }: SettingsSheetProps) {
             </select>
           </label>
 
-          <label className="flex items-center justify-between gap-3 text-sm text-text-secondary">
+          <label htmlFor="settings-reminder" className="flex items-center justify-between gap-3 text-sm text-text-secondary">
             Default reminder
             <input
+              id="settings-reminder"
               type="time"
               value={preferences.defaultReminderTime}
               onChange={(e) => setDefaultReminderTime(e.target.value)}
