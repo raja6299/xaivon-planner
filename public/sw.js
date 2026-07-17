@@ -10,11 +10,13 @@
 const CACHE_VERSION = 'v2'
 const CACHE = `dtr-cache-${CACHE_VERSION}`
 const CORE_ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.webmanifest',
-  '/favicon.svg',
-  '/icons/icon.svg',
+  './',
+  './index.html',
+  './manifest.webmanifest',
+  './favicon.svg',
+  './icons/icon.svg',
+  './icons/icon-192.png',
+  './icons/icon-512.png',
 ]
 
 self.addEventListener('install', (event) => {
@@ -52,7 +54,7 @@ self.addEventListener('fetch', (event) => {
 
   // Navigations: network-first with offline fallback to the cached shell.
   if (request.mode === 'navigate') {
-    event.respondWith(fetch(request).catch(() => caches.match('/index.html')))
+    event.respondWith(fetch(request).catch(() => caches.match(new URL('./index.html', self.location).href)))
     return
   }
 

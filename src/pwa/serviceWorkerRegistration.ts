@@ -75,7 +75,7 @@ function trackInstallingWorker(registration: ServiceWorkerRegistration): void {
 
 function start(): void {
   navigator.serviceWorker
-    .register('/sw.js')
+    .register(import.meta.env.BASE_URL + 'sw.js')
     .then((registration) => {
       currentRegistration = registration
 
