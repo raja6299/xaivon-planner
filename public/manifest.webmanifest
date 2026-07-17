@@ -6,23 +6,23 @@
   "background_color": "#0f1115",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "scope": "./",
-  "start_url": "./",
+  "scope": "/xaivon-planner/",
+  "start_url": "/xaivon-planner/",
   "icons": [
     {
-      "src": "./icons/icon.svg",
+      "src": "/xaivon-planner/icons/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     },
     {
-      "src": "./icons/icon-192.png",
+      "src": "/xaivon-planner/icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "./icons/icon-512.png",
+      "src": "/xaivon-planner/icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"

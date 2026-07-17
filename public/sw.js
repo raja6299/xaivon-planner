@@ -9,14 +9,16 @@
  */
 const CACHE_VERSION = 'v2'
 const CACHE = `dtr-cache-${CACHE_VERSION}`
+
+// Resolve all assets relative to the service worker URL to guarantee absolute paths
 const CORE_ASSETS = [
-  './',
-  './index.html',
-  './manifest.webmanifest',
-  './favicon.svg',
-  './icons/icon.svg',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
+  new URL('./', self.location).href,
+  new URL('./index.html', self.location).href,
+  new URL('./manifest.webmanifest', self.location).href,
+  new URL('./favicon.svg', self.location).href,
+  new URL('./icons/icon.svg', self.location).href,
+  new URL('./icons/icon-192.png', self.location).href,
+  new URL('./icons/icon-512.png', self.location).href,
 ]
 
 self.addEventListener('install', (event) => {
